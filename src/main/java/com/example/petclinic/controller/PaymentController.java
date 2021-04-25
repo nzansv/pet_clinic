@@ -1,28 +1,50 @@
 package com.example.petclinic.controller;
 
+import com.example.petclinic.entities.Appointment;
 import com.example.petclinic.entities.Payment;
 import com.example.petclinic.entities.PetOwner;
+import com.example.petclinic.repository.AppointmentRepository;
+import com.example.petclinic.repository.PaymentRepository;
 import com.example.petclinic.services.PaymentService;
 import com.example.petclinic.services.PetOwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/payments")
 public class PaymentController {
+
     @Autowired
-    private PaymentService paymentService;
+    private PaymentRepository paymentRepository;
 
-    public List<Payment> getAll() {
-        return paymentService.getAll();
+    @GetMapping("")
+    public List<Payment> getAllPayment() {
+        return paymentRepository.findAll();
     }
 
-    public void createPayment(Payment payment){
-        paymentService.create(payment);
+    @GetMapping("/{id}")
+    public Payment getPaymentById(@PathVariable("id") Long id) {
+        return paymentRepository.findById(id).get();
     }
 
-    public Payment getPaymentById(Long id) {
-        return paymentService.getById(id);
+    @PostMapping("")
+    public Payment createPayment(@RequestBody Payment payment) {
+        return paymentRepository.saveAndFlush(payment);
     }
+
+    @PutMapping("/{id}")
+    public Payment updatePayment(@PathVariable Long id,
+                                     @RequestBody Payment payment) {
+        payment.setId(id);
+        return paymentRepository.saveAndFlush(payment);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletePayment(@PathVariable Long id){
+        paymentRepository.deleteById(id);
+    }
+
 }

@@ -27,6 +27,7 @@ public class AppointmentServiceImp implements AppointmentService {
 
     @Override
     public Appointment getById(Long id) {
+
         return appointmentRepository.getById(id);
     }
 }

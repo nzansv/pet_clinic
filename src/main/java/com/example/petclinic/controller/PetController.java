@@ -1,28 +1,44 @@
 package com.example.petclinic.controller;
 
 import com.example.petclinic.entities.Pet;
-import com.example.petclinic.services.PetService;
+import com.example.petclinic.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+
+@RestController
+@RequestMapping("/pets")
 public class PetController {
 
-    @Autowired
-    private PetService petService;
+        @Autowired
+        private PetRepository petRepository;
 
-    public List<Pet> getAll() {
-        return petService.getAll();
-    }
+        @GetMapping("")
+        public List<Pet> getAllPet() {
+            return petRepository.findAll();
+        }
 
-    public void createPet(Pet pet){
-        petService.create(pet);
-    }
+        @GetMapping("/{id}")
+        public Pet getPetById(@PathVariable("id") Long id) {
+            return petRepository.findById(id).get();
+        }
 
-    public Pet getPetById(Long id) {
-        return petService.getById(id);
+        @PostMapping("")
+        public Pet createPet(@RequestBody Pet pet) {
+            return petRepository.saveAndFlush(pet);
+        }
+
+        @PutMapping("/{id}")
+        public Pet updatePet(@PathVariable Long id,
+                                     @RequestBody Pet pet) {
+            pet.setId(id);
+            return petRepository.saveAndFlush(pet);
+        }
+
+        @DeleteMapping("/{id}")
+        public void deletePet(@PathVariable Long id){
+            petRepository.deleteById(id);
+        }
     }
-}

@@ -1,28 +1,44 @@
 package com.example.petclinic.controller;
 
-import com.example.petclinic.entities.Pet;
 import com.example.petclinic.entities.Veterinarian;
-import com.example.petclinic.services.VeterinarianService;
+import com.example.petclinic.repository.VeterinarianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+
+@RestController
+@RequestMapping("/veterinarians")
 public class VeterinarianController {
 
     @Autowired
-    private VeterinarianService veterinarianService;
+    private VeterinarianRepository veterinarianRepository;
 
-    public List<Veterinarian> getAll(){
-        return veterinarianService.getAll();
+    @GetMapping("")
+    public List<Veterinarian> getAllVeterinarian() {
+        return veterinarianRepository.findAll();
     }
 
-    public void createVeterinarian(Veterinarian veterinarian){
-        veterinarianService.create(veterinarian);
+    @GetMapping("/{id}")
+    public Veterinarian getVeterinarianById(@PathVariable("id") Long id) {
+        return veterinarianRepository.findById(id).get();
     }
 
-    public Veterinarian getVeterinarianById(Long id) {
-        return veterinarianService.getById(id);
+    @PostMapping("")
+    public Veterinarian createVeterinarian(@RequestBody Veterinarian veterinarian) {
+        return veterinarianRepository.saveAndFlush(veterinarian);
+    }
+
+    @PutMapping("/{id}")
+    public Veterinarian updateVeterinarian(@PathVariable Long id,
+                         @RequestBody Veterinarian veterinarian) {
+        veterinarian.setId(id);
+        return veterinarianRepository.saveAndFlush(veterinarian);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteVeterinarian(@PathVariable Long id){
+        veterinarianRepository.deleteById(id);
     }
 }

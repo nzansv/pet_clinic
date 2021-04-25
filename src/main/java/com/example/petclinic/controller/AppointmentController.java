@@ -1,31 +1,44 @@
 package com.example.petclinic.controller;
 
 import com.example.petclinic.entities.Appointment;
-import com.example.petclinic.entities.PetOwner;
-import com.example.petclinic.services.AppointmentService;
-import com.example.petclinic.services.AppointmentServiceImp;
-import com.example.petclinic.services.PetOwnerService;
+import com.example.petclinic.repository.AppointmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
-
+@RestController
+@RequestMapping("/appointment")
 public class AppointmentController {
 
     @Autowired
-    private AppointmentService appointmentService;
+    private AppointmentRepository appointmentRepository;
 
-    public List<Appointment> getAll() {
-        return appointmentService.getAll();
+    @GetMapping("")
+    public List<Appointment> getAllAppointment() {
+        return appointmentRepository.findAll();
     }
 
-    public void createAppointment(Appointment appointment){
-        appointmentService.create(appointment);
+    @GetMapping("/{id}")
+    public Appointment getAppointmentById(@PathVariable("id") Long id) {
+        return appointmentRepository.findById(id).get();
     }
 
-    public Appointment getcreateAppointmentById(Long id) {
-        return appointmentService.getById(id);
+    @PostMapping("")
+    public Appointment createAppointment(@RequestBody Appointment appointment) {
+        return appointmentRepository.saveAndFlush(appointment);
     }
+
+    @PutMapping("/{id}")
+    public Appointment updateAppointment(@PathVariable Long id,
+                                 @RequestBody Appointment appointment) {
+        appointment.setId(id);
+        return appointmentRepository.saveAndFlush(appointment);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAppointment(@PathVariable Long id){
+        appointmentRepository.deleteById(id);
+    }
+
 }

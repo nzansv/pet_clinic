@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 @Table(name= "petowners")
@@ -22,6 +21,10 @@ public class PetOwner {
     private String email;
     @Column(name = "phone_number")
     private String phone_number;
+
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name="account_id",nullable=false, insertable = false, updatable = false)
+    private	Account	account;
 
 
     public PetOwner(String name, String email, String phone_number) {

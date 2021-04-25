@@ -5,6 +5,8 @@ import net.minidev.json.annotate.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="pets")
@@ -25,6 +27,7 @@ public class Pet {
 
     @Column(name="petowner_id")
     private Long petowner_id;
+
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "petowner_id", nullable = false, insertable = false, updatable = false)
