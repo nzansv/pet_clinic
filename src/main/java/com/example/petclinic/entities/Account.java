@@ -24,9 +24,6 @@ public class Account implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(mappedBy="account",fetch = FetchType.EAGER, optional = false)
-    private	PetOwner petOwner;
-
 
     @Override
     public String toString() {
@@ -34,7 +31,6 @@ public class Account implements UserDetails {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", petOwner=" + petOwner +
                 ", roles=" + roles +
                 '}';
     }

@@ -7,6 +7,7 @@ import com.example.petclinic.repository.AppointmentRepository;
 import com.example.petclinic.repository.PaymentRepository;
 import com.example.petclinic.services.PaymentService;
 import com.example.petclinic.services.PetOwnerService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/payments")
+@Api(value = "Api Controller class")
 public class PaymentController {
 
     @Autowired

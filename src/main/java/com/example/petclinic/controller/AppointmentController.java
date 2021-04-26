@@ -2,6 +2,7 @@ package com.example.petclinic.controller;
 
 import com.example.petclinic.entities.Appointment;
 import com.example.petclinic.repository.AppointmentRepository;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/appointment")
+@Api(value = "Api Controller class")
 public class AppointmentController {
 
     @Autowired

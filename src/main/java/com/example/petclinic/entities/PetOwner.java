@@ -20,17 +20,13 @@ public class PetOwner {
     @Column(name = "email")
     private String email;
     @Column(name = "phone_number")
-    private String phone_number;
-
-    @OneToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name="account_id",nullable=false, insertable = false, updatable = false)
-    private	Account	account;
+    private String phone;
 
 
-    public PetOwner(String name, String email, String phone_number) {
+    public PetOwner(String name, String email, String phone) {
         this.name = name;
         this.email = email;
-        this.phone_number = phone_number;
+        this.phone = phone;
     }
 
     public PetOwner() {

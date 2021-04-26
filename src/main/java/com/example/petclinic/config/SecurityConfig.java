@@ -23,10 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers("/users/hello/**").permitAll()
-                .antMatchers("/users/create").hasAuthority("ADMIN")
-                .anyRequest().authenticated()
+                .antMatchers("/").permitAll()
+                .antMatchers("/petowners", "/veterinarians").hasAuthority("USER")
+                .antMatchers("/","/registration", "/list-petowners").permitAll()
+                .antMatchers("/add-petowner", "/petowners/**").hasAuthority("ADMIN")
+                .and()
+                .formLogin()
                 .and()
                 .addFilter(new JwtTokenGeneratorFIlter(authenticationManager()))
 

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>User List</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+</head>
+<body>
+<a href="/">Back to Home</a>
+<br/><br/>
+<h1>User List</h1>
+
+<div>
+    <nobr>
+        <a href="/add-petowner">Add Petowner</a>
+    </nobr>
+</div>
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+        </tr>
+        {{#petowners}}
+            <tr>
+                <td><a href="/petowners/{{id}}">{{id}}</a></td>
+                <td><a href="/petowners/{{id}}">{{name}}</a></td>
+                <td><a href="/petowners/{{id}}">{{email}}</a></td>
+                <td>{{phone}}</td>
+            </tr>
+        {{/petowners}}
+    </table>
+</div>
+</body>
+</html>

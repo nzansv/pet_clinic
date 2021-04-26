@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 
 @Entity
-@Table(name= "accounts")
+@Table(name= "roles")
 @Component
 @Data
 public class Role implements GrantedAuthority {
@@ -17,11 +17,12 @@ public class Role implements GrantedAuthority {
     @Column(name = "role_id")
     private Long id;
     @Column(name = "name")
-    private String name;
+    @Enumerated(EnumType.STRING)
+    private RoleType name;
 
     @Override
     public String getAuthority() {
-        return name;
+        return String.valueOf(name);
     }
 }
 
