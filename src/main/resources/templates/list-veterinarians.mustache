@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>User List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
     <style type="text/css">
         .navbar-dark .nav-item:hover .nav-link {
             color: green;
@@ -53,9 +52,6 @@
     <div class="row">
         <div class="col-md-auto">
             <div>
-                <nobr>
-                    <a href="/add-petowner">Add Petowner</a>
-                </nobr>
             </div>
             <br/><br/>
             <div>
@@ -70,9 +66,9 @@
                     <tbody>
                     {{#veterinarians}}
                         <tr>
-                            <td><a href="/petowners/{{id}}">{{id}}</a></td>
-                            <td><a href="/petowners/{{id}}">{{fullname}}</a></td>
-                            <td><a href="/petowners/{{id}}">{{cab_no}}</a></td>
+                            <td><a href="/veterinarians/{{vet_id}}">{{vet_id}}</a></td>
+                            <td><a href="/veterinarians/{{vet_id}}">{{fullname}}</a></td>
+                            <td><a href="/veterinarians/{{vet_id}}">{{cab_no}}</a></td>
                         </tr>
                     {{/veterinarians}}
                     </tbody>

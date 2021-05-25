@@ -1,8 +1,11 @@
 package com.example.petclinic.controller;
 
 import com.example.petclinic.entities.PetOwner;
+import com.example.petclinic.entities.Veterinarian;
 import com.example.petclinic.repository.PetOwnerRepository;
+import com.example.petclinic.repository.VeterinarianRepository;
 import com.example.petclinic.services.PetOwnerService;
+import com.example.petclinic.services.VeterinarianService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,22 @@ public class CRUDController {
 
     @Autowired
     PetOwnerService petOwnerService;
+
+
+    @Autowired
+    private VeterinarianRepository veterinarianRepository;
+
+    @Autowired
+    VeterinarianService veterinarianService;
+
+
+    @RequestMapping("/list-veterinarians")
+    public String handleRequestVet(Model model) {
+
+        List<Veterinarian> veterinarians = veterinarianRepository.findAll();
+        model.addAttribute("veterinarians", veterinarians);
+        return "list-veterinarians";
+    }
 
 
     @RequestMapping("/list-petowners")
