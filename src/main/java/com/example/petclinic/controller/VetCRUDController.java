@@ -46,7 +46,7 @@ public class VetCRUDController {
                           @ModelAttribute("veterinarian") Veterinarian veterinarian) {
         try {
             Veterinarian newVet = veterinarianRepository.save(veterinarian);
-            return "add-veterinarianr" ;
+            return "add-veterinarian" ;
         } catch (Exception ex) {
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
