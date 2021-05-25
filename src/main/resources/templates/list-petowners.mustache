@@ -3,13 +3,55 @@
 <head>
     <meta charset="UTF-8" />
     <title>User List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <style type="text/css">
+    .navbar-dark .nav-item:hover .nav-link {
+        color: green;
+    }
+    .navbar-dark .nav-item .nav-link{
+        color: black;
+        padding-left: 30px;
+        font-weight: bold;
+        margin-top: 13px;
+        font-size: 19px;
+        font-family: Montserrat;
+    }
+
+</style>
 </head>
 <body>
-<a href="/">Back to Home</a>
-<br/><br/>
-<h1>User List</h1>
 
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom" style="height: 60px">
+        <div class="collapse navbar-collapse justify-content-md-center" >
+            <ul class="navbar-nav " >
+                <li class="nav-item active">
+                    <a class="navbar-brand" routerLink="" >
+                        <h1 style="color: black">Pet Clinic</h1>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/" >Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list-petowners" >Owners</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/list-veterinarians" >Veterinarians</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login" >Login</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div style="background: black; height: 13px"> </div>
+</header>
+
+<div class="container" style="margin: 0 auto">
+    <div class="row">
+        <div class="col-md-auto">
 <div>
     <nobr>
         <a href="/add-petowner">Add Petowner</a>
@@ -17,13 +59,16 @@
 </div>
 <br/><br/>
 <div>
-    <table border="1">
+    <table class="table-striped table-hover">
+        <thead>
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Phone</th>
-            <th>Email</th>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
         </tr>
+        </thead>
+        <tbody>
         {{#petowners}}
             <tr>
                 <td><a href="/petowners/{{id}}">{{id}}</a></td>
@@ -32,7 +77,13 @@
                 <td>{{phone}}</td>
             </tr>
         {{/petowners}}
+        </tbody>
     </table>
+
+</div>
+
+</div>
+</div>
 </div>
 </body>
 </html>
